@@ -1,0 +1,19 @@
+{
+  "name": "assetTraceAPI",
+  "version": "1.0.0",
+  "description": "IoT to DB Integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "async": "^2.1.5",
+    "bcryptjs": "*",
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0",
+    "oracledb": "^1.11.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
