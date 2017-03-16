@@ -38,7 +38,9 @@ router.delete('/', function (req, res) {
 });
 //update
 router.put('/', function (req, res) {
-    var selectStatement = `
+   
+  
+    selectStatement = `
                 UPDATE 
                     ITEM_TBL A
                 SET 
@@ -51,6 +53,22 @@ router.put('/', function (req, res) {
                 (SELECT * FROM TAG_TBL B WHERE B.UUID LIKE '${req.body.UUID}' AND A.ITEM_ID=B.ITEM_ID )`;
     
     getItems(selectStatement,req, res);
+    selectStatement=`  UPDATE 
+                    ITEM_TBL A
+                SET 
+                    A.ITEM_ID='${req.body.ITEM_ID}'
+                    
+                WHERE EXISTS
+                (SELECT * FROM TAG_TBL B WHERE B.UUID LIKE '${req.body.UUID}' AND A.ITEM_ID=B.ITEM_ID )`;
+  getItems(selectStatement,req, res);
+  selectStatement=`  UPDATE 
+                    TAG_TBL B
+                SET 
+                    B.ITEM_ID='${req.body.ITEM_ID}'
+                    
+                WHERE  B.UUID LIKE '${req.body.UUID}' `;
+  getItems(selectStatement,req, res);
+    //console.log(item_id);
 
  res.send('ok');
 });
