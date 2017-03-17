@@ -16,7 +16,7 @@ router.get('/checkPoint', function (req, res) {
 
 /*ASSET DISTRIBUTION*/
 router.get('/statusCount', function (req, res) {
-    var selectStatement = `SELECT LOC_ID,COUNT(*) AS COUNT FROM ITEM_TBL GROUP BY LOC_ID`;
+    var selectStatement = `SELECT A.LOC_NAME,B.COUNT FROM LOCATION_TBL A,(SELECT LOC_ID,COUNT(*) AS COUNT FROM ITEM_TBL GROUP BY LOC_ID) B WHERE A.LOC_ID=B.LOC_ID`;
     getItems(selectStatement, req, res);
 });
 

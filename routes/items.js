@@ -38,11 +38,11 @@ router.get('/transitAging', function (req, res) {
 from (
   select case  
     when value1 between 0 and 5 then '0-5'
-    when value1 between 6 and 15 then '6-15'
-    when value1 between 16 and 45 then '16-45'
-    when value1 between 46 and 120 then '46-120'
-    when value1 between 121 and 380 then '121-380'
-    else '381+' end as range
+    when value1 between 6 and 15 then '5-15'
+    when value1 between 16 and 45 then '15-45'
+    when value1 between 46 and 120 then '45-120'
+    when value1 between 121 and 380 then '120-380'
+    else '380+' end as range
   from (SELECT 
   ITEM_NAME,((SELECT (SYSDATE - TO_DATE('01-01-1970 00:00:00', 'DD-MM-YYYY HH24:MI:SS')) * 24 * 60 * 60 * 1000-(330*60*1000) FROM DUAL)-READ_TIME)/(60*1000) as value1
 FROM 
