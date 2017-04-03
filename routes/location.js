@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 });
 /*CHECK POINT*/
 router.get('/checkPoint', function (req, res) {
-    var selectStatement = `SELECT STATUS,COUNT(*) AS COUNT FROM AT_EVENT_TBL GROUP BY STATUS`;
+    var selectStatement = `SELECT STATUS,COUNT(*) AS COUNT FROM AT_EVENT_TBL,(SELECT TO_CHAR (SYSDATE, 'DD-MON-YY')as dat FROM DUAL)  WHERE LOC_ID LIKE 'KOR' AND READ_DATE LIKE dat GROUP BY STATUS`;
     getItems(selectStatement, req, res);
 });
 

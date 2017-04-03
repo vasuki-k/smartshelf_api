@@ -21,6 +21,8 @@ WHERE
   A.ITEM_ID=B.ITEM_ID`;
     getItems(selectStatement, req, res);
 });
+
+//insert
 router.post('/', function (req, res) {
     var selectStatement = `INSERT INTO TAG_TBL VALUES('${req.body.UUID }' , '${req.body.TYPE}', '${req.body.ITEM_ID}')`;
      getItems(selectStatement, req, res);
@@ -29,6 +31,7 @@ router.post('/', function (req, res) {
        res.send('ok');
 });
 
+//delete
 router.delete('/', function (req, res) {
     var selectStatement = `DELETE FROM ITEM_TBL WHERE ITEM_NAME='${req.body.ITEM_NAME}'`;
     getItems(selectStatement,req, res);
@@ -53,7 +56,7 @@ router.put('/', function (req, res) {
                 (SELECT * FROM TAG_TBL B WHERE B.UUID LIKE '${req.body.UUID}' AND A.ITEM_ID=B.ITEM_ID )`;
     
     getItems(selectStatement,req, res);
-    selectStatement=`  UPDATE 
+    selectStatement=`UPDATE 
                     ITEM_TBL A
                 SET 
                     A.ITEM_ID='${req.body.ITEM_ID}'
