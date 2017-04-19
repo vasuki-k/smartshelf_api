@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 /*ASSET UTILISATION*/
 router.get('/assetUtilisation', function (req, res) {
 
-var selectStatement = `SELECT D.ITEM_NAME,
+    var selectStatement = `SELECT D.ITEM_NAME,
   C.SUM
 FROM
   (SELECT A.UUID,
@@ -24,7 +24,7 @@ FROM
   ) C,
   TAG_TBL B,ITEM_TBL D
 WHERE  C.UUID = B.UUID AND D.ITEM_ID=B.ITEM_ID
-AND RowNum  <= 5`;		
+AND RowNum  <= 5`;
     getItems(selectStatement, req, res);
 });
 /*ASSET STATUS*/
@@ -44,7 +44,7 @@ from (
     when value1 between 121 and 380 then '120-380'
     else '380+' end as range
   from (SELECT 
-  ITEM_NAME,((SELECT (SYSDATE - TO_DATE('01-01-1970 00:00:00', 'DD-MM-YYYY HH24:MI:SS')) * 24 * 60 * 60 * 1000-(330*60*1000) FROM DUAL)-READ_TIME)/(60*1000) as value1
+  ITEM_NAME,((SELECT (SYSDATE - TO_DATE('01-01-1970 00:00:00', 'DD-MM-YYYY HH24:MI:SS')) * 24 * 60 * 60 * 1000-(19800000) FROM DUAL)-READ_TIME)/(60*1000) as value1
 FROM 
   ITEM_TBL
 WHERE 
@@ -52,6 +52,13 @@ WHERE
 group by t.range
 ORDER BY t.range ASC`;
     getItems(selectStatement, req, res);
+});
+/*lacation asset count for heat map*/
+router.get('/locationCount', function (req, res) {
+    var selectStatement = `select item_name,loc_id,count(*) as count from ITEM_TBL GROUP BY item_name,loc_id ORDER by ITEM_NAME`;
+    var c = getItems(selectStatement, req, res);
+    //console.log(c);
+    
 });
 
 
@@ -88,7 +95,7 @@ function getItems(selectStatement, req, res) {
 
     var doConnect = function (cb) {
         dbConfig.doConnect(function (err, conn) {
-            cb(null,conn);
+            cb(null, conn);
         });
     };
 

@@ -36,9 +36,9 @@ module.exports.doSelect = function (conn, selectStatement, cb) {
             console.log('Error in execution of select statement' + err.message);
             return cb(err, conn);
         } else {
-            console.log(result);
+            console.log("\n**************\n"+result+"\n**************\n");
             return cb(null, result);
         }
     }
     );
-};
+};  
