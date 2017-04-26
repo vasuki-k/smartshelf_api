@@ -22,7 +22,7 @@ router.use(function (req, res, next) {
 
 router.use('/items/', require('./items'));
 router.use('/locations/', require('./location'));
-router.use('/crud_assets/', require('./crud_assets'));
+router.use('/crud_items/', require('./crud_items'));
 router.use('/crud_location/', require('./crud_location'));
 router.use('/live_preview/', require('./live_preview'));
 router.get('/', function (req, res) {
