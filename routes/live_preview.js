@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var dbConfig = require('../dbconfig');
 
-// livepreview
+// livepreview- http://localhost:3090/api/live_preview
 router.get('/', function (req, res) {
     var selectStatement = `select BASE_LOC_ID,item_name,count(*) as COUNT
 from item_tbl
