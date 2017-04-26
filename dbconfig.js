@@ -1,8 +1,8 @@
 var oracledb = require('oracledb');
 
 var dbConfig = {
-    user: process.env.DBAAS_USER_NAME || "AT",
-    password: process.env.DBAAS_USER_PASSWORD || "AT",
+    user: process.env.DBAAS_USER_NAME || "SHELF",
+    password: process.env.DBAAS_USER_PASSWORD || "SHELF",
     connectString: process.env.DBAAS_DEFAULT_CONNECT_DESCRIPTOR || "localhost/XE",
     externalAuth: process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false,
     tzOffSet: "0.229"
