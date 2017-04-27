@@ -37,13 +37,10 @@ function getItems(selectStatement, req, res) {
 
                 var j;
 
-                // json_arg.push({"SHELF_ID": ref_value});
-
                 for (var i in result.rows) {
 
                     if (result.rows[i]['BASE_LOC_ID'] == ref_value)
                     {
-
                         item_name = result.rows[i]['ITEM_NAME'];
 
                         json_arg.push(
@@ -66,13 +63,9 @@ function getItems(selectStatement, req, res) {
                     }
 
                 }
-                //console.log(json_arg);
-                // data.push(json_arg);
                 var content = {"SHELF_ID": ref_value, "ITEMS":  json_arg};
-                        //console.log(content);
                 data.push(content);
                 console.log(content['ITEMS']);
-              //  console.log(data);
                 res.status(200).json(data);
                 return cb(null, conn);
             }
