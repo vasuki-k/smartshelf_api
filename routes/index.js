@@ -25,6 +25,7 @@ router.use('/locations/', require('./location'));
 router.use('/crud_items/', require('./crud_items'));
 router.use('/crud_location/', require('./crud_location'));
 router.use('/live_preview/', require('./live_preview'));
+router.use('/crud_tags/', require('./crud_tags'));
 router.get('/', function (req, res) {
     res.send('Welcome to  Retail App Apis!');
 });
