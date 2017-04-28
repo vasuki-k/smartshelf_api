@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var dbConfig = require('../dbconfig');
 
-// display
+// display- http://localhost:3091/api/crud_location
 router.get('/', function (req, res) {
     var selectStatement = `
 SELECT 
@@ -13,19 +13,20 @@ FROM
 `;
     getItems(selectStatement, req, res);
 });
+// insert- http://localhost:3091/api/crud_location
 router.post('/', function (req, res) {
     var selectStatement = `INSERT INTO LOCATION_TBL VALUES('${req.body.LOC_ID }' , '${req.body.LOC_NAME}', '${req.body.LOC_TYPE}')`;
      getItems(selectStatement, req, res);
        res.send('ok');
 });
-
+//delete- http://localhost:3091/api/crud_location
 router.delete('/', function (req, res) {
     var selectStatement = `DELETE FROM LOCATION_TBL WHERE LOC_ID LIKE '${req.body.LOC_ID}'`;
     console.log(req.body.LOC_ID);
     getItems(selectStatement,req, res);
     res.send('ok');
 });
-//update
+//update- http://localhost:3091/api/crud_location
 router.put('/', function (req, res) {
     var selectStatement = `
                 UPDATE 

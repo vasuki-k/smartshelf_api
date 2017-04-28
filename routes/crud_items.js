@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var dbConfig = require('../dbconfig');
 
-// display
+// display- http://localhost:3091/api/crud_items
 router.get('/', function (req, res) {
     var selectStatement = `
 SELECT 
@@ -24,20 +24,20 @@ WHERE
     getItems(selectStatement, req, res);
 });
 
-//insert
+//insert- http://localhost:3091/api/crud_items
 router.post('/', function (req, res) {
     var selectStatement = `INSERT INTO ITEM_TBL(ITEM_ID,ITEM_NAME,ITEM_CATEGORY,ITEM_TYPE,BASE_LOC_ID,LOC_ID) VALUES('${req.body.ITEM_ID}','${req.body.ITEM_NAME}', '${req.body.ITEM_CATEGORY}', '${req.body.ITEM_TYPE}', '${req.body.BASE_LOC_ID}', '${req.body.BASE_LOC_ID}')`;
        getItems(selectStatement, req, res);
        res.send('ok');
 });
 
-//delete
+//delete- http://localhost:3091/api/crud_items
 router.delete('/', function (req, res) {
     var selectStatement = `DELETE FROM ITEM_TBL WHERE ITEM_ID='${req.body.ITEM_ID}'`;
     getItems(selectStatement,req, res);
     res.send('ok');
 });
-//update
+//update- http://localhost:3091/api/crud_items
 router.put('/', function (req, res) {
    
   

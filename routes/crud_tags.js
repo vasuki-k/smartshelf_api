@@ -3,7 +3,7 @@ var router = express.Router();
 var async = require('async');
 var dbConfig = require('../dbconfig');
 
-// display
+// display- http://localhost:3091/api/crud_tags
 router.get('/', function (req, res) {
     var selectStatement = `
 SELECT 
@@ -21,7 +21,7 @@ FROM
     getItems(selectStatement, req, res);
 });
 
-//insert
+//insert- http://localhost:3091/api/crud_tags
 router.post('/', function (req, res) {
     var selectStatement = `INSERT INTO TAG_TBL VALUES('${req.body.UUID }' , '${req.body.TYPE}', '${req.body.ITEM_ID}')`;
      getItems(selectStatement, req, res);
@@ -29,14 +29,14 @@ router.post('/', function (req, res) {
        res.send('ok');
 });
 
-//delete
+//delete- http://localhost:3091/api/crud_tags
 router.delete('/', function (req, res) {
  
      var selectStatement = `DELETE FROM TAG_TBL WHERE UUID='${req.body.UUID}'`;
     getItems(selectStatement,req, res);
     res.send('ok');
 });
-//update
+//update- http://localhost:3091/api/crud_tags
 router.put('/', function (req, res) {
    
   selectStatement=`  UPDATE 
