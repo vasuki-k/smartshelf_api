@@ -10,62 +10,57 @@ router.get('/', function (req, res) {
 });
 
 
-// count of misplaced items: http://localhost:3091/api/items/misplaced
-router.get('/misplaced', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
-    getItems(selectStatement, req, res);
-});
+//// count of misplaced items: http://localhost:3091/api/items/misplaced
+//router.get('/misplaced', function (req, res) {
+//    var selectStatement = `SELECT * FROM ITEM_TBL`;
+//    getItems(selectStatement, req, res);
+//});
 
 
-// count of items in shelves items: http://localhost:3091/api/items/in_shelf
+// count of items in each shelf(current location): http://localhost:3091/api/items/in_shelf
 router.get('/in_shelf', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
+    var selectStatement = `select LOC_ID, count(*) as count from ITEM_TBL group by LOC_ID`;
     getItems(selectStatement, req, res);
 });
 
 
 // count of shelves: http://localhost:3091/api/items/number_shelves
 router.get('/number_shelves', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
+    var selectStatement = `select count(*) as count from LOCATION_TBL where LOC_TYPE='IN-STORE'`;
     getItems(selectStatement, req, res);
 });
 
-// count of items: http://localhost:3091/api/items/number_items
+// count of items(in shelf/not in shelf/picked up): http://localhost:3091/api/items/number_items
 router.get('/number_items', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
+    var selectStatement = `select count(*) as count from ITEM_TBL;`;
     getItems(selectStatement, req, res);
 });
 
-// Total items in shelf: http://localhost:3091/api/items/total_in_shelf
-router.get('/total_in_shelf', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
-    getItems(selectStatement, req, res);
-});
-
-// Total items in shelf: http://localhost:3091/api/items/not_in_shelf
-router.get('/not_in_shelf', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
-    getItems(selectStatement, req, res);
-});
+//// Total items in shelf: http://localhost:3091/api/items/total_in_shelf
+//router.get('/total_in_shelf', function (req, res) {
+//    var selectStatement = `SELECT * FROM ITEM_TBL`;
+//    getItems(selectStatement, req, res);
+//});
+//
+//// Total items not in shelf: http://localhost:3091/api/items/not_in_shelf
+//router.get('/not_in_shelf', function (req, res) {
+//    var selectStatement = `SELECT * FROM ITEM_TBL`;
+//    getItems(selectStatement, req, res);
+//});
 
 //dropdown-tags with item id nul: http://localhost:3091/api/items/dropdown_tag
 router.get('/dropdown_tag', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
+    var selectStatement = `SELECT uuid FROM TAG_TBL where ITEM_ID is null`;
     getItems(selectStatement, req, res);
 });
 
 
-//dropdown-item id: http://localhost:3091/api/items/dropdown_item_id
-router.get('/dropdown_item_id', function (req, res) {
-    var selectStatement = `SELECT * FROM ITEM_TBL`;
+//dropdown-item id: http://localhost:3091/api/items/dropdown_item_name
+router.get('/dropdown_item_name', function (req, res) {
+    var selectStatement = `SELECT distinct item_name FROM ITEM_TBL`;
     getItems(selectStatement, req, res);
 });
 
-///*ASSET STATUS*/
-//router.get('/statusCount', function (req, res) {
-//    var selectStatement = `SELECT STATUS,COUNT(*) AS COUNT FROM ITEM_TBL GROUP BY STATUS`;
-//    getItems(selectStatement, req, res);
-//});
 
 //router.get('/:id', function (req, res) {
 //    var selectStatement = `SELECT * FROM ITEM_TBL WHERE ITEM_ID='${req.params.id}'`;
