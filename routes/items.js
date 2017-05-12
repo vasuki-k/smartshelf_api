@@ -66,6 +66,11 @@ router.get('/dropdown_item_name', function (req, res) {
     getItems(selectStatement, req, res);
 });
 
+//dropdown-item id: http://localhost:3091/api/items/dropdown_locations
+router.get('/dropdown_locations', function (req, res) {
+    var selectStatement = `SELECT distinct LOC_ID FROM LOCATION_TBL`;
+    getItems(selectStatement, req, res);
+});
 
 //router.get('/:id', function (req, res) {
 //    var selectStatement = `SELECT * FROM ITEM_TBL WHERE ITEM_ID='${req.params.id}'`;

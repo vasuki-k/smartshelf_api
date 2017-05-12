@@ -12,6 +12,7 @@ SELECT
   B.ITEM_ID,
   A.ITEM_CATEGORY,
   A.ITEM_TYPE,
+  A.BASE_LOC_ID,
   C.LOC_NAME,
   B.TYPE
 FROM 
@@ -28,6 +29,8 @@ WHERE
 router.post('/', function (req, res) {
     var selectStatement = `INSERT INTO ITEM_TBL(ITEM_ID,ITEM_NAME,ITEM_CATEGORY,ITEM_TYPE,BASE_LOC_ID,LOC_ID) VALUES('${req.body.ITEM_ID}','${req.body.ITEM_NAME}', '${req.body.ITEM_CATEGORY}', '${req.body.ITEM_TYPE}', '${req.body.BASE_LOC_ID}', '${req.body.BASE_LOC_ID}')`;
        getItems(selectStatement, req, res);
+    selectstatement=`update TAG_TBL set ITEM_ID='${req.body.ITEM_ID}',TYPE='${req.body.TYPE}' where UUID='${req.body.UUID}'`;
+    getItems(selectstatement, req, res);
        res.send('ok');
 });
 
@@ -35,24 +38,13 @@ router.post('/', function (req, res) {
 router.delete('/', function (req, res) {
     var selectStatement = `DELETE FROM ITEM_TBL WHERE ITEM_ID='${req.body.ITEM_ID}'`;
     getItems(selectStatement,req, res);
+     selectstatement=`update TAG_TBL set ITEM_ID='' where UUID='${req.body.UUID}'`;
+    getItems(selectstatement, req, res);
     res.send('ok');
 });
 //update- http://localhost:3091/api/crud_items
 router.put('/', function (req, res) {
-   
-  
-    selectStatement = `
-                UPDATE 
-                    ITEM_TBL A
-                SET 
-                    A.ITEM_NAME='${req.body.ITEM_NAME}',
-                    A.ITEM_CATEGORY='${req.body.ITEM_CATEGORY}',
-                    A.ITEM_TYPE='${req.body.ITEM_TYPE}',
-                    A.BASE_LOC_ID='${req.body.BASE_LOC_ID}',
-                    A.LOC_ID='${req.body.LOC_ID}'
-                WHERE EXISTS
-                (SELECT * FROM TAG_TBL B WHERE B.UUID LIKE '${req.body.UUID}' AND A.ITEM_ID=B.ITEM_ID )`;
-    
+    var selectStatement = `UPDATE ITEM_TBL A SET A.ITEM_NAME='${req.body.ITEM_NAME}',A.ITEM_CATEGORY='${req.body.ITEM_CATEGORY}',A.ITEM_TYPE='${req.body.ITEM_TYPE}',A.BASE_LOC_ID='${req.body.BASE_LOC_ID}',A.LOC_ID='${req.body.LOC_ID} WHERE A.ITEM_ID='${req.body.ITEM_ID}'`;
     getItems(selectStatement,req, res);
  res.send('ok');
 });

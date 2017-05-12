@@ -23,7 +23,7 @@ FROM
 
 //insert- http://localhost:3091/api/crud_tags
 router.post('/', function (req, res) {
-    var selectStatement = `INSERT INTO TAG_TBL VALUES('${req.body.UUID }' , '${req.body.TYPE}', '${req.body.ITEM_ID}')`;
+    var selectStatement = `INSERT INTO TAG_TBL(UUID,TYPE) VALUES('${req.body.UUID }' , '${req.body.TYPE}')`;
      getItems(selectStatement, req, res);
     
        res.send('ok');
